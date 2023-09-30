@@ -1,7 +1,7 @@
 def COLOR_MAP = [
     'SUCCESS': 'good', 
     'FAILURE': 'danger',
-    'UNSTABLE': 'danger'
+    'UNSTABLE': 'danger' 
 ]
 pipeline {
   agent any
@@ -58,8 +58,8 @@ pipeline {
                 withCredentials([string(credentialsId: 'SonarQube-Token', variable: 'SONAR_TOKEN')]) {
                 sh """
                 mvn sonar:sonar \
-                -Dsonar.projectKey=cicd-pipeline-project \
-                -Dsonar.host.url=http://172.31.12.154:9000 \
+                -Dsonar.projectKey=java-webapp \
+                -Dsonar.host.url=http://172.31.22.198:9000 \
                 -Dsonar.login=$SONAR_TOKEN
                 """
                 }
@@ -81,7 +81,7 @@ pipeline {
               nexusUrl: '172.31.24.251:8081',
               groupId: 'webapp',
               version: "${env.BUILD_ID}-${env.BUILD_TIMESTAMP}",
-              repository: 'maven-project-releases',  //"${NEXUS_REPOSITORY}",
+              repository: 'Maven-Project-Release',  //"${NEXUS_REPOSITORY}",
               credentialsId: "${NEXUS_CREDENTIAL_ID}",
               artifacts: [
                   [artifactId: 'webapp',
