@@ -8,7 +8,7 @@ pipeline {
   environment {
     WORKSPACE = "${env.WORKSPACE}"
     NEXUS_CREDENTIAL_ID = 'Nexus-Credential'
-    SONAR_TOKEN ='SonarQube-Token'
+    SONAR_TOKEN ='SonarQube-token'
     //NEXUS_USER = "$NEXUS_CREDS_USR"
     //NEXUS_PASSWORD = "$Nexus-Token"
     //NEXUS_URL = "172.31.18.62:8081"
@@ -55,7 +55,7 @@ pipeline {
     stage('SonarQube Inspection') {
         steps {
             withSonarQubeEnv('SonarQube') { 
-                withCredentials([string(credentialsId: 'SonarQube-Token', variable: 'SONAR_TOKEN')]) {
+                withCredentials([string(credentialsId: 'SonarQube-token', variable: 'SONAR_TOKEN')]) {
                 sh """
                 mvn sonar:sonar \
                 -Dsonar.projectKey=java-webapp \
