@@ -8,6 +8,7 @@ pipeline {
   environment {
     WORKSPACE = "${env.WORKSPACE}"
     NEXUS_CREDENTIAL_ID = 'Nexus-Credential'
+    SONAR_TOKEN ='SonarQube-Token'
     //NEXUS_USER = "$NEXUS_CREDS_USR"
     //NEXUS_PASSWORD = "$Nexus-Token"
     //NEXUS_URL = "172.31.18.62:8081"
@@ -58,7 +59,7 @@ pipeline {
                 sh """
                 mvn sonar:sonar \
                 -Dsonar.projectKey=cicd-pipeline-project \
-                -Dsonar.host.url=http://172.31.23.58:9000 \
+                -Dsonar.host.url=http://172.31.12.154:9000 \
                 -Dsonar.login=$SONAR_TOKEN
                 """
                 }
@@ -77,7 +78,7 @@ pipeline {
            nexusArtifactUploader(
               nexusVersion: 'nexus3',
               protocol: 'http',
-              nexusUrl: '172.31.16.85:8081',
+              nexusUrl: '172.31.24.251:8081',
               groupId: 'webapp',
               version: "${env.BUILD_ID}-${env.BUILD_TIMESTAMP}",
               repository: 'maven-project-releases',  //"${NEXUS_REPOSITORY}",
