@@ -1,7 +1,7 @@
 def COLOR_MAP = [
     'SUCCESS': 'good', 
     'FAILURE': 'danger',
-    'UNSTABLE': 'danger'
+    'UNSTABLE': 'danger' 
 ]
 pipeline {
   agent any
@@ -86,7 +86,7 @@ pipeline {
               artifacts: [
                   [artifactId: 'webapp',
                   classifier: '',
-                  file: "/var/lib/jenkins/workspace/mono-complete-cicd-pipeline/webapp/target/webapp.war",
+                  file: "${WORKSPACE}/webapp/target/webapp.war",
                   type: 'war']
               ]
            )
@@ -97,7 +97,7 @@ pipeline {
             HOSTS = 'dev'
         }
         steps {
-            withCredentials([usernamePassword(credentialsId: 'Ansible-Credential', passwordVariable: 'PASSWORD', usernameVariable: 'USER_NAME')]) {
+            withCredentials([usernamePassword(credentialsId: 'ansible-credential', passwordVariable: 'PASSWORD', usernameVariable: 'USER_NAME')]) {
                 sh "ansible-playbook -i ${WORKSPACE}/ansible-config/aws_ec2.yaml ${WORKSPACE}/deploy.yaml --extra-vars \"ansible_user=$USER_NAME ansible_password=$PASSWORD hosts=tag_Environment_$HOSTS workspace_path=$WORKSPACE\""
             }
         }
@@ -107,7 +107,7 @@ pipeline {
             HOSTS = 'stage'
         }
         steps {
-            withCredentials([usernamePassword(credentialsId: 'Ansible-Credential', passwordVariable: 'PASSWORD', usernameVariable: 'USER_NAME')]) {
+            withCredentials([usernamePassword(credentialsId: 'ansible-credential', passwordVariable: 'PASSWORD', usernameVariable: 'USER_NAME')]) {
                 sh "ansible-playbook -i ${WORKSPACE}/ansible-config/aws_ec2.yaml ${WORKSPACE}/deploy.yaml --extra-vars \"ansible_user=$USER_NAME ansible_password=$PASSWORD hosts=tag_Environment_$HOSTS workspace_path=$WORKSPACE\""
             }
         }
@@ -122,7 +122,7 @@ pipeline {
             HOSTS = 'prod'
         }
         steps {
-            withCredentials([usernamePassword(credentialsId: 'Ansible-Credential', passwordVariable: 'PASSWORD', usernameVariable: 'USER_NAME')]) {
+            withCredentials([usernamePassword(credentialsId: 'ansible-credential', passwordVariable: 'PASSWORD', usernameVariable: 'USER_NAME')]) {
                 sh "ansible-playbook -i ${WORKSPACE}/ansible-config/aws_ec2.yaml ${WORKSPACE}/deploy.yaml --extra-vars \"ansible_user=$USER_NAME ansible_password=$PASSWORD hosts=tag_Environment_$HOSTS workspace_path=$WORKSPACE\""
             }
          }
