@@ -1,14 +1,13 @@
 def COLOR_MAP = [
     'SUCCESS': 'good', 
     'FAILURE': 'danger',
-    'UNSTABLE': 'danger' 
+    'UNSTABLE': 'danger'
 ]
 pipeline {
   agent any
   environment {
     WORKSPACE = "${env.WORKSPACE}"
     NEXUS_CREDENTIAL_ID = 'Nexus-Credential'
-    SONAR_TOKEN ='SonarQube-Token'
     //NEXUS_USER = "$NEXUS_CREDS_USR"
     //NEXUS_PASSWORD = "$Nexus-Token"
     //NEXUS_URL = "172.31.18.62:8081"
@@ -58,8 +57,8 @@ pipeline {
                 withCredentials([string(credentialsId: 'SonarQube-Token', variable: 'SONAR_TOKEN')]) {
                 sh """
                 mvn sonar:sonar \
-                -Dsonar.projectKey=java-webapp \
-                -Dsonar.host.url=http://172.31.22.198:9000 \
+                -Dsonar.projectKey=cicd-pipeline-project \
+                -Dsonar.host.url=http://172.31.50.233:9000 \
                 -Dsonar.login=$SONAR_TOKEN
                 """
                 }
@@ -78,7 +77,7 @@ pipeline {
            nexusArtifactUploader(
               nexusVersion: 'nexus3',
               protocol: 'http',
-              nexusUrl: '172.31.24.251:8081',
+              nexusUrl: '172.31.63.151:8081',
               groupId: 'webapp',
               version: "${env.BUILD_ID}-${env.BUILD_TIMESTAMP}",
               repository: 'maven-project-releases',  //"${NEXUS_REPOSITORY}",
@@ -97,7 +96,7 @@ pipeline {
             HOSTS = 'dev'
         }
         steps {
-            withCredentials([usernamePassword(credentialsId: 'ansible-credential', passwordVariable: 'PASSWORD', usernameVariable: 'USER_NAME')]) {
+            withCredentials([usernamePassword(credentialsId: 'Ansible-Credential', passwordVariable: 'PASSWORD', usernameVariable: 'USER_NAME')]) {
                 sh "ansible-playbook -i ${WORKSPACE}/ansible-config/aws_ec2.yaml ${WORKSPACE}/deploy.yaml --extra-vars \"ansible_user=$USER_NAME ansible_password=$PASSWORD hosts=tag_Environment_$HOSTS workspace_path=$WORKSPACE\""
             }
         }
@@ -107,7 +106,7 @@ pipeline {
             HOSTS = 'stage'
         }
         steps {
-            withCredentials([usernamePassword(credentialsId: 'ansible-credential', passwordVariable: 'PASSWORD', usernameVariable: 'USER_NAME')]) {
+            withCredentials([usernamePassword(credentialsId: 'Ansible-Credential', passwordVariable: 'PASSWORD', usernameVariable: 'USER_NAME')]) {
                 sh "ansible-playbook -i ${WORKSPACE}/ansible-config/aws_ec2.yaml ${WORKSPACE}/deploy.yaml --extra-vars \"ansible_user=$USER_NAME ansible_password=$PASSWORD hosts=tag_Environment_$HOSTS workspace_path=$WORKSPACE\""
             }
         }
@@ -122,7 +121,7 @@ pipeline {
             HOSTS = 'prod'
         }
         steps {
-            withCredentials([usernamePassword(credentialsId: 'ansible-credential', passwordVariable: 'PASSWORD', usernameVariable: 'USER_NAME')]) {
+            withCredentials([usernamePassword(credentialsId: 'Ansible-Credential', passwordVariable: 'PASSWORD', usernameVariable: 'USER_NAME')]) {
                 sh "ansible-playbook -i ${WORKSPACE}/ansible-config/aws_ec2.yaml ${WORKSPACE}/deploy.yaml --extra-vars \"ansible_user=$USER_NAME ansible_password=$PASSWORD hosts=tag_Environment_$HOSTS workspace_path=$WORKSPACE\""
             }
          }
