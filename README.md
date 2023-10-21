@@ -23,7 +23,7 @@
     - Login to your GitHub Account
     - Create a Repository called "Jenkins-CICD-Project"
     - Clone the Repository in the "Repository" directory/folder in your local
-    - Download the code in in this repository "Main branch": https://github.com/awanmbandi/realworld-cicd-pipeline-project.git
+    - Download the code in in this repository "Main branch": https://github.com/jacodetunde/Complete-Monolithic-App-CICD-Pipeline.git
     - Unzip the code/zipped file
     - Copy and Paste everything from the zipped file into the repository you cloned in your local
     - Add the code to git, commit and push it to your upstream branch "main or master"
@@ -35,7 +35,7 @@
     - Instance type: t2.medium
     - Security Group (Edit/Open): 8080, 9100 and 22 to 0.0.0.0/0
     - Key pair: Select or create a new keypair
-    - User data (Copy the following user data): https://github.com/awanmbandi/realworld-cicd-pipeline-project/blob/maven-nexus-sonarqube-jenkins-install/jenkins-install.sh
+    - User data (Copy the following user data): https://github.com/jacodetunde/Mono-App-CICD-Pipeline-Infrastructure.git
     - Launch Instance
 
 3) SonarQube
@@ -44,7 +44,7 @@
     - Instance type: t2.medium
     - Security Group (Eit/Open): 9000, 9100 and 22 to 0.0.0.0/0
     - Key pair: Select or create a new keypair
-    - User data (Copy the following user data): https://github.com/awanmbandi/realworld-cicd-pipeline-project/blob/maven-nexus-sonarqube-jenkins-install/sonarqube-install.sh
+    - User data (Copy the following user data): https://github.com/jacodetunde/Mono-App-CICD-Pipeline-Infrastructure.git
     - Launch Instance
 
 4) Nexus
@@ -53,7 +53,7 @@
     - Instance type: t2.medium
     - Security Group (Eit/Open): 8081, 9100 and 22 to 0.0.0.0/0
     - Key pair: Select or create a new keypair
-    - User data (Copy the following user data): https://github.com/awanmbandi/realworld-cicd-pipeline-project/blob/maven-nexus-sonarqube-jenkins-install/nexus-install.sh
+    - User data (Copy the following user data): https://github.com/jacodetunde/Mono-App-CICD-Pipeline-Infrastructure.git
     - Launch Instance
 
 5) EC2 (Dev/Stage/Prod)
@@ -63,7 +63,7 @@
     - Instance type: t2.micro
     - Security Group (Eit/Open): 8080, 9100, 9997 and 22 to 0.0.0.0/0
     - Key pair: Select or create a new keypair
-    - User data (Copy the following user data): https://github.com/awanmbandi/realworld-cicd-pipeline-project/blob/tomcat-splunk-installation/tomcat-ssh-configure.sh
+    - User data (Copy the following user data): https://github.com/jacodetunde/Mono-App-CICD-Pipeline-Infrastructure.git
     - Launch Instance
 
 6) Prometheus
@@ -118,17 +118,17 @@
 ## Configure All Systems
 ### Configure Promitheus
   - Login/SSH to your Prometheus Server
-  - Clone the following repository: https://github.com/awanmbandi/realworld-cicd-pipeline-project.git
+  - Clone the following repository: https://github.com/jacodetunde/Complete-Monolithic-App-CICD-Pipeline.git
   - Change directory to "realworld-cicd-pipeline-project"
-  - Swtitch to the "prometheus-and-grafana" git branch  
+  - Swtitch to the "prometheus-and-grafana-nodeexporter" folder  
   - Run: ./install-prometheus.sh
   - Confirm the status shows "Active (running)"
   - Exit
 
 ### Configure Grafana
   - Login/SSH to your Grafana Server
-  - Clone the following repository: https://github.com/awanmbandi/realworld-cicd-pipeline-project.git
-  - Change directory to "realworld-cicd-pipeline-project"
+  - Clone the following repository: https://github.com/jacodetunde/Complete-Monolithic-App-CICD-Pipeline.git 
+  - Change directory to "Complete-Monolithic-App-CICD-Pipeline"
   - Swtitch to the "prometheus-and-grafana" git branch 
   - Run: ls or ll  (to confirm you have the branch files)
   - Run: ./install-grafana.sh
@@ -140,7 +140,7 @@
   - Perform the following operations on all of them
   - Install git by running: sudo yum install git -y 
   - Clone the following repository: https://github.com/awanmbandi/realworld-cicd-pipeline-project.git
-  - Change directory to "realworld-cicd-pipeline-project"
+  - Change directory to "Complete-Monolithic-App-CICD-Pipeline"
   - Swtitch to the "prometheus-and-grafana" git branch 
   - Run: ls or ll  (to confirm you have the branch files)
   - Run: ./install-node-exporter.sh
@@ -155,9 +155,9 @@
   - Login/SSH into the "Jenkins-Maven-Ansible", "Nexus" and "SonarQube" VM instance
   - Perform the following operations on all of them
   - Install git by running: sudo yum install git -y    (The SonarQube server already has git)
-  - Clone the following repository: https://github.com/awanmbandi/realworld-cicd-pipeline-project.git
-  - Change directory to "realworld-cicd-pipeline-project"
-  - Swtitch to the "prometheus-and-grafana" git branch 
+  - Clone the following repository: https://github.com/jacodetunde/Complete-Monolithic-App-CICD-Pipeline.git
+  - Change directory to "Complete-Monolithic-App-CICD-Pipeline"
+  - Swtitch to the "prometheus-and-grafana" folder
   - Run: ls or ll  (to confirm you have the branch files including "install-node-exporter.sh")
   - Run: ./install-node-exporter.sh
   - Make sure the status shows "Active (running)"
@@ -636,7 +636,7 @@ echo "ansibleadmin ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 ![FinalProductDisplay!](https://github.com/awanmbandi/realworld-cicd-pipeline-project/raw/zdocs/images/Screen%20Shot%202023-04-27%20at%204.50.42%20PM.png)
 
 ### NOTE: That By completing this project, you are now considered a Professional DevOps Engineer.  
-You've been able to accomplish something very unique and special which most people only dream of in their IT journey. Remmber that during an interview, you may be asked some challenging questions or be faced with a trial assignment that require you to both utilize your existing skillsets and think out of the box. During this time you must be very confident and determined in your pursuit. 
+You've been able to accomplish something very unique and special which most people only dream of in their IT journey. 
 
 Never forget that you have what it takes to add more than enough VALUE to any organization out there in the industry and to STAND OUT in any interview setting no matter who is sitted on the interview seat.
 
